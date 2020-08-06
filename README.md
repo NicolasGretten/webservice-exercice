@@ -78,7 +78,7 @@ $job = dispatch(new QueryJob([
     'task_action' => 'retrieve-customer',
     'request' => [
         'id' => 'cus_ffd8ec7418f901f72fe89',
-    ]
+    ],
     'callback' => [
         'task_action' => 'confirm-customer',
         'request' => [
