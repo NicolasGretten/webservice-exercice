@@ -120,11 +120,6 @@ $app->router->group([
     require __DIR__ . '/../routes/index.php';
 
     /*
-     * /api/users
-     */
-    require __DIR__ . '/../routes/api/users.php';
-
-    /*
      * /docs
      */
     require __DIR__ . '/../routes/docs/index.php';
