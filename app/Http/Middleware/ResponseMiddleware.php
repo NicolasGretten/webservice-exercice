@@ -6,6 +6,7 @@ use App\Jobs\QueryJob;
 use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Laravel\Lumen\Http\ResponseFactory;
 
@@ -31,8 +32,8 @@ class ResponseMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure                 $next
      *
      * @return mixed
      * @throws Exception
