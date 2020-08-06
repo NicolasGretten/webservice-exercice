@@ -73,8 +73,7 @@ $app->configure('scribe');
 */
 
 $app->middleware([
-    'response' => App\Http\Middleware\ResponseMiddleware::class,
-    'callback' => App\Http\Middleware\CallbackMiddleware::class
+    'response' => App\Http\Middleware\ResponseMiddleware::class
 ]);
 
 $app->routeMiddleware([

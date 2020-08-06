@@ -2,10 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Events\CustomerEvent;
+use App\Events\ShuttleJobEvent;
+use App\Http\Controllers\AuthController;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use stdClass;
 
-class QueryJob extends Job implements ShouldQueue
+class ShuttleJob extends Job implements ShouldQueue
 {
     private $request;
 
@@ -28,7 +34,8 @@ class QueryJob extends Job implements ShouldQueue
     public function handle()
     {
         try {
-            $request = new \Illuminate\Http\Request;
+            $request = new Request();
+            $response = new stdClass();
 
             /*
              * Get request from job
@@ -40,48 +47,38 @@ class QueryJob extends Job implements ShouldQueue
             }
 
             /*
-             * Load data into request object
+             * Load data into current request object
              */
-            $request->replace(get_object_vars($job->request));
+            foreach($job->request as $param) {
+                $request->{$param} = $param;
+            }
 
             /*
-             * Load callback into request object
+             * Load callback into current request object
              */
-            if(! empty($this->callback)) {
-                $callback = json_decode($this->callback);
-
-                if(json_last_error()) {
-                    throw new Exception(json_last_error_msg(), 500);
-                }
-
-                $request->replace(get_object_vars($job->callback));
-            }
+            $response->callback = empty($job->callback) ? null : get_object_vars($job->callback);
 
             /*
              * Select task
              */
             switch($job->task_action) {
-                /*
-                 * Example
-                 *
-                 * case 'retrieve-customer':
-                 *    $response = (new CustomerController())->retrieve($request);
-                 *    break;
-                 *
-                 * case 'create-user:
-                 *    $response = (new AuthController())->create($request);
-                 *    break;
-                 */
+                case 'validate:login.id':
+                    $response->data = (new AuthController())->retrieve($request);
+                    // todo : Vérifier la réponse
+                break;
+
                 default:
                     throw new Exception('task ' . $job->task . ' unknown', 404);
-                    break;
+                break;
             }
-        }
-        catch(\Illuminate\Validation\ValidationException $e) {
-            throw new Exception();
+
+            /*
+             * Send response with new Job
+             */
+            event(new ShuttleJobEvent($response));
         }
         catch(Exception $e) {
-
+            log::debug($e->getMessage());
         }
     }
 
