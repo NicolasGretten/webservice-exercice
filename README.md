@@ -74,7 +74,7 @@ echo $post->translate('en')->title; // My cool post
 
 ## Create query job
 ```bash
-$job = dispatch(new QueryJob([
+$job = dispatch(new ShuttleJob([
     'task_action' => 'retrieve-customer',
     'request' => [
         'id' => 'cus_ffd8ec7418f901f72fe89',

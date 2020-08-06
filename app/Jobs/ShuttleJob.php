@@ -2,9 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Events\CustomerEvent;
 use App\Events\ShuttleJobEvent;
-use App\Http\Controllers\AuthController;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
@@ -62,10 +60,14 @@ class ShuttleJob extends Job implements ShouldQueue
              * Select task
              */
             switch($job->task_action) {
-                case 'validate:login.id':
-                    $response->data = (new AuthController())->retrieve($request);
-                    // todo : Vérifier la réponse
-                break;
+                /*
+                 * Example
+                 *
+                 * case 'validate:login.id':
+                 *    $response->data = (new AuthController())->retrieve($request);
+                 *    // todo : Vérifier la réponse
+                 * break;
+                 */
 
                 default:
                     throw new Exception('task ' . $job->task . ' unknown', 404);
