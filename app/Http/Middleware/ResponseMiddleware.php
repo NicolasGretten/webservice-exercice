@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Jobs\QueryJob;
 use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;

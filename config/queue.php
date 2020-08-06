@@ -5,14 +5,14 @@ return [
     'connections' => [
         'database' => [
             'driver' => 'database',
-            'connection' => 'jobs',
+            'connection' => 'common',
             'table' => 'jobs_pending',
             'queue' => 'default',
             'retry_after' => 90,
         ],
     ],
     'failed' => [
-        'database' => 'jobs',
+        'database' => 'common',
         'table' => 'jobs_failed',
     ],
 ];

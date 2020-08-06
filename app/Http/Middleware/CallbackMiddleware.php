@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Jobs\QueryJob;
 use Closure;
 use Exception;
+use Illuminate\Http\Request;
 
 class CallbackMiddleware
 {
@@ -13,8 +14,8 @@ class CallbackMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param  Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
