@@ -23,7 +23,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, SoftDeletes;
 
-    protected $connection = 'data';
+    protected $connection = 'common';
     protected $table = 'users';
     protected $dates = ['created_at, updated_at, deleted_at'];
     protected $primaryKey = 'id';

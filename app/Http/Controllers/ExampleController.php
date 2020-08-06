@@ -6,8 +6,8 @@ class ExampleController extends ControllerBase
 {
     public function __construct() {
         $this->middleware('auth', [
-                'except' => ['login']]
-        );
+                'except' => ['login']
+        ]);
 
         $this->middleware('auth.role:user', [
             'except' => ['login']

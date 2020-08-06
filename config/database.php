@@ -14,7 +14,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'strict'    => false,
         ],
-        'jobs' => [
+        'common' => [
             'driver'    => 'pgsql',
             'host'      => env('DB2_HOST'),
             'port'      => env('DB2_PORT'),
