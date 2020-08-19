@@ -95,3 +95,7 @@ Run Queue
 ```bash
 php artisan queue:listen --queue=[queue]
 ```
+Delay
+```bash
+dispatch(new MyMailerJob)->delay(Carbon::now()->addMinutes(10));
+```
