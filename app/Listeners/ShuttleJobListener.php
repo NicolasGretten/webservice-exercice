@@ -30,7 +30,7 @@ class ShuttleJobListener
         $job = [
             'task'      => $shuttle->job->task,
             'params'    => $shuttle->job->params,
-            'status'    => $shuttle->job->status
+            'success'   => $shuttle->job->success
         ];
 
         dispatch(new ShuttleJob($job))->onQueue($shuttle->job->queue);
