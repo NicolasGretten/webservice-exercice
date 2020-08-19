@@ -6,16 +6,15 @@ use stdClass;
 
 class ShuttleJobEvent extends Event
 {
-    public $request;
-    private $callback;
+    public $job;
 
     /**
      * Create a new event instance.
      *
-     * @param      $request
+     * @param $job
      */
-    public function __construct(stdClass $request)
+    public function __construct(stdClass $job)
     {
-        $this->request = $request;
+        $this->job = $job;
     }
 }

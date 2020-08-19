@@ -3,10 +3,12 @@
 namespace App\Jobs;
 
 use App\Events\ShuttleJobEvent;
+use App\Http\Controllers\AuthController;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use stdClass;
 
 class ShuttleJob extends Job implements ShouldQueue
@@ -33,7 +35,7 @@ class ShuttleJob extends Job implements ShouldQueue
     {
         try {
             $request = new Request();
-            $response = new stdClass();
+            $newJob = new stdClass();
 
             /*
              * Get request from job
@@ -45,47 +47,68 @@ class ShuttleJob extends Job implements ShouldQueue
             }
 
             /*
-             * Load data into current request object
+             * Set job to response queue
              */
-            foreach($job->request as $param) {
-                $request->{$param} = $param;
-            }
-
-            /*
-             * Load callback into current request object
-             */
-            $response->callback = empty($job->callback) ? null : get_object_vars($job->callback);
+            $newJob->queue = $job->callback_queue;
 
             /*
              * Select task
              */
-            switch($job->task_action) {
+            switch($job->task) {
                 /*
-                 * Example
-                 *
-                 * case 'validate:login.id':
-                 *    $response->data = (new AuthController())->retrieve($request);
-                 *    // todo : Vérifier la réponse
-                 * break;
+                 * EXAMPLE
                  */
+//                case 'validate:login_id':
+//                    /*
+//                     * Validate the params sent
+//                     */
+//                    $validator = Validator::make(get_object_vars($job->params), [
+//                        'id' => 'required|string|size:25'
+//                    ]);
+//
+//                    if ($validator->fails())
+//                    {
+//                        throw new Exception($validator->messages(), 409);
+//                    }
+//
+//                    /*
+//                     * Set params to Request
+//                     */
+//                    $request->id = $job->params->id;
+//
+//                    /*
+//                     * Set task name
+//                     */
+//                    $newJob->task = 'confirm:login_id';
+//
+//                    /*
+//                     * Set params to job
+//                     */
+//                    $newJob->params = $job->params->id;
+//
+//                    /*
+//                     * Check values and set success state
+//                     */
+//                    $newJob->success = (bool) (new AuthController())->retrieve($request)->getStatusCode() === 200;
+//                    break;
 
                 default:
                     throw new Exception('task ' . $job->task . ' unknown', 404);
-                break;
+                    break;
             }
 
             /*
-             * Send response with new Job
+             * Create new event with created job
              */
-            event(new ShuttleJobEvent($response));
+            event(new ShuttleJobEvent($newJob));
         }
         catch(Exception $e) {
-            log::debug($e->getMessage());
+            log::error($e);
         }
     }
 
-    public function failed(Exception $exception)
+    public function failed($e)
     {
-        app()->captureException($exception);
+        log::error($e);
     }
 }
