@@ -84,7 +84,8 @@ class ShuttleJob extends Job implements ShouldQueue
 //                    /*
 //                     * Set params to job
 //                     */
-//                    $newJob->params = $job->params->id;
+//                    $newJob->params = new StdClass();
+//                    $newJob->params->id = $job->params->id;
 //
 //                    /*
 //                     * Check values and set success state
