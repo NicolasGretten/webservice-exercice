@@ -47,9 +47,11 @@ class ShuttleJob extends Job implements ShouldQueue
             }
 
             /*
-             * Set job to response queue
+             * Set job to response queue if it defined
              */
-            $newJob->queue = $job->callback_queue;
+            if(! empty($job->callback_queue)) {
+                $newJob->queue = $job->callback_queue;
+            }
 
             /*
              * Select task
