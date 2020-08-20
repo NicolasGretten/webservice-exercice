@@ -93,12 +93,12 @@ class ShuttleJob extends Job implements ShouldQueue
 //                     * Check values and set success state
 //                     */
 //                    $newJob->success = (bool) (new AuthController())->retrieve($request)->getStatusCode() === 200;
-//                    break;
 //
 //                    /*
 //                    * Create new event with created job
 //                    */
 //                    event(new ShuttleJobEvent($newJob));
+//                    break;
 
                 default:
                     throw new Exception('task ' . $job->task . ' unknown', 404);
