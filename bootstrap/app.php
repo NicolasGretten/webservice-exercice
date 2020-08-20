@@ -98,6 +98,7 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Chuckrincon\LumenConfigDiscover\DiscoverServiceProvider::class);
 $app->register(Knuckles\Scribe\ScribeServiceProvider::class);
+$app->register(Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

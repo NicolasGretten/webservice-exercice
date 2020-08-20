@@ -6,12 +6,13 @@
     "type": "project",
     "require": {
         "php": "^7.2.5",
+        "ext-json": "*",
         "astrotomic/laravel-translatable": "^11.8",
+        "bugsnag/bugsnag-laravel": "^2.0",
         "chuckrincon/lumen-config-discover": "^1.0",
         "laravel/lumen-framework": "^7.0",
         "laravelista/lumen-vendor-publish": "7.0",
-        "tymon/jwt-auth": "dev-develop",
-      "ext-json": "*"
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
