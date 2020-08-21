@@ -46,7 +46,9 @@ class ShuttleJob extends Job implements ShouldQueue
                 throw new Exception(json_last_error_msg(), 500);
             }
         }
-        catch(Exception $e) {}
+        catch(Exception $e) {
+            report($e);
+        }
 
         /*
          * Set job to response queue if it defined
