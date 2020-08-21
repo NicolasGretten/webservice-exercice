@@ -85,6 +85,6 @@ class ShuttleJob extends Job implements ShouldQueue
 
     public function failed($e)
     {
-        log::error($e);
+        report($e);
     }
 }
