@@ -97,3 +97,9 @@ Delay
 ```bash
 dispatch(new MyMailerJob)->delay(Carbon::now()->addMinutes(10));
 ```
+
+## Misc
+Return json from route with async param
+```bash
+return response()->json([$content], [code], ['async' => 'true']);
+```
