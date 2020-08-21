@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ShuttleJobEvent;
 use App\Jobs\ShuttleJob;
-use Illuminate\Support\Facades\Log;
 
 class ShuttleJobListener
 {
