@@ -32,6 +32,6 @@ class ShuttleJobListener
             'success'   => $shuttle->job->success
         ];
 
-        dispatch(new ShuttleJob($job))->onQueue($shuttle->job->queue);
+        dispatch(new ShuttleJob($job))->onQueue($shuttle->job->callback_queue);
     }
 }
