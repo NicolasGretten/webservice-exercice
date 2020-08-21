@@ -76,13 +76,13 @@ echo $post->translate('en')->title; // My cool post
 ```bash
 dispatch(new ShuttleJob([
     'task' => 'validate:login_id',
+     'params' => [
+         'login_id' => $event->customer->login_id,
+     ],
     'callback_queue' => 'customer',
     'callback_params' => [
         'customer_id' => $event->customer->id,
         'login_id'    => $event->customer->login_id
-    ],
-    'params' => [
-        'id' => $event->customer->login_id,
     ]
 ]))->onQueue('customer');
 ```
