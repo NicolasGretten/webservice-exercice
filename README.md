@@ -74,17 +74,15 @@ echo $post->translate('en')->title; // My cool post
 
 ## Create query job
 ```bash
-$job = dispatch(new ShuttleJob([
-    'task_action' => 'retrieve-customer',
-    'request' => [
-        'id' => 'cus_ffd8ec7418f901f72fe89',
+dispatch(new ShuttleJob([
+    'task' => 'validate:login_id',
+    'callback_queue' => 'customer',
+    'callback_params' => [
+        'customer_id' => $event->customer->id,
+        'login_id'    => $event->customer->login_id
     ],
-    'callback' => [
-        'task_action' => 'confirm-customer',
-        'request' => [
-            'id' => 'boo_dkg5ae7za8d4fg7e8af4g7'
-        ],
-        'on_queue' => 'booking',
+    'params' => [
+        'id' => $event->customer->login_id,
     ]
 ]))->onQueue('customer');
 ```
