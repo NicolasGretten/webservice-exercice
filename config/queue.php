@@ -8,7 +8,7 @@ return [
             'connection' => 'common',
             'table' => 'jobs_pending',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 5,
         ],
     ],
     'failed' => [
