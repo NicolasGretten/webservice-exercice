@@ -49,7 +49,8 @@ class ResponseMiddleware
             'timestamp' => Carbon::now()->getTimestamp(),
             'signature' => md5(json_encode($response->original)),
             'content' => [
-                'success' => $response->status() >= 400 ? false : true
+                'success' => $response->status() >= 400 ? false : true,
+                'async' => empty($response->headers->get('async')) ? false : (boolean) $response->headers->get('async') == true
             ]
         ];
 
