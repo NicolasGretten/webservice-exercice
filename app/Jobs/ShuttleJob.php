@@ -78,7 +78,9 @@ class ShuttleJob extends Job implements ShouldQueue
             }
 
         }
-        catch(Exception $e) {}
+        catch(Exception $e) {
+            report($e);
+        }
     }
 
     public function failed($e)
