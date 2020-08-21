@@ -2,18 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Events\ShuttleJobEvent;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use stdClass;
 
 class ShuttleJob extends Job implements ShouldQueue
 {
     private $request;
+    private $currentJob;
 
     /**
      * Create a new job instance.
@@ -22,7 +20,7 @@ class ShuttleJob extends Job implements ShouldQueue
      */
     public function __construct(array $request)
     {
-        $this->request = json_encode($request);
+        $this->request = $request;
     }
 
     /**
@@ -33,82 +31,55 @@ class ShuttleJob extends Job implements ShouldQueue
      */
     public function handle()
     {
+        $callbackJob = new stdClass();
+
         try {
-            $request = new Request();
-            $newJob = new stdClass();
+            $this->request = json_encode($this->request);
 
             /*
              * Get request from job
              */
-            $job = json_decode($this->request);
+            $this->currentJob = json_decode($this->request);
 
             if(json_last_error()) {
                 throw new Exception(json_last_error_msg(), 500);
             }
+        }
+        catch(Exception $e) {}
 
-            /*
-             * Set job to response queue if it defined
-             */
-            if(! empty($job->callback_queue)) {
-                $newJob->queue = $job->callback_queue;
-            }
+        /*
+         * Set job to response queue if it defined
+         */
+        if(! empty($this->currentJob->callback_queue)) {
+            $callbackJob->queue = $this->currentJob->callback_queue;
+        }
 
+        /*
+         * Set callback params to job if it defined
+         */
+        if(! empty($this->currentJob->callback_params)) {
+            $callbackJob->params = $this->currentJob->callback_params;
+        }
+
+        try {
             /*
              * Select task
              */
-            switch($job->task) {
+            switch($this->currentJob->task) {
                 /*
-                 * EXAMPLE
-                 */
-//                case 'validate:login_id':
-//                    /*
-//                     * Validate the params sent
-//                     */
-//                    $validator = Validator::make(get_object_vars($job->params), [
-//                        'id' => 'required|string|size:25'
-//                    ]);
-//
-//                    if ($validator->fails())
-//                    {
-//                        throw new Exception($validator->messages(), 409);
-//                    }
-//
-//                    /*
-//                     * Set params to Request
-//                     */
-//                    $request->id = $job->params->id;
-//
-//                    /*
-//                     * Set task name
-//                     */
-//                    $newJob->task = 'confirm:login_id';
-//
-//                    /*
-//                     * Set params to job
-//                     */
-//                    $newJob->params = new StdClass();
-//                    $newJob->params->id = $job->params->id;
-//
-//                    /*
-//                     * Check values and set success state
-//                     */
-//                    $newJob->success = (bool) (new AuthController())->retrieve($request)->getStatusCode() === 200;
-//
-//                    /*
-//                    * Create new event with created job
-//                    */
-//                    event(new ShuttleJobEvent($newJob));
-//                    break;
-
+                 * Example
+                 *
+                case 'confirm:login_id':
+                    CustomerController::ValidateLoginId($this->currentJob);
+                    break;
+                */
                 default:
-                    throw new Exception('task ' . $job->task . ' unknown', 404);
+                    throw new Exception('task ' . $this->currentJob->task . ' unknown', 404);
                     break;
             }
 
         }
-        catch(Exception $e) {
-            log::error($e);
-        }
+        catch(Exception $e) {}
     }
 
     public function failed($e)
