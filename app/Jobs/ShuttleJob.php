@@ -5,6 +5,8 @@ namespace App\Jobs;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use stdClass;
 
 class ShuttleJob extends Job implements ShouldQueue
@@ -69,6 +71,15 @@ class ShuttleJob extends Job implements ShouldQueue
                  * Example
                  *
                 case 'confirm:login_id':
+                    $validator = Validator::make(get_object_vars($job->params), [
+                        'customer_id' => 'required|string|size:25'
+                    ]);
+
+                    if ($validator->fails())
+                    {
+                        throw new ValidationException($validator);
+                    }
+
                     CustomerController::ValidateLoginId($this->currentJob);
                     break;
                 */
@@ -77,6 +88,9 @@ class ShuttleJob extends Job implements ShouldQueue
                     break;
             }
 
+        }
+        catch(ValidationException $e) {
+            report($e);
         }
         catch(Exception $e) {
             report($e);
