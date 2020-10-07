@@ -13,7 +13,7 @@ git fetch --all
 
 Then is possible to merge another branch from the new remote to the current one
 ```bash
-git merge template/[branch to merge] --allow-unrelated-histories
+git merge template/[branch to merge] [--allow-unrelated-histories]
 ```
 ## Documentation
 [Official documentation](https://scribe.readthedocs.io/en/latest/documenting/index.html)
