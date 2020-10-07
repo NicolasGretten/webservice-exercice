@@ -33,7 +33,7 @@ php artisan make:migration create_[table_name]_table
 
 ### Run migrations
 ```bash
-php artisan migrate --database=[database]
+php artisan migrate --database=[database] [--path=database\migrations\[filename].php]]
 ```
 ### Seed data
 [Official documentation](https://laravel.com/docs/7.x/seeding)
