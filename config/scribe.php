@@ -79,7 +79,7 @@ return [
      * Text to place in the "Introduction" section. Markdown and HTML are supported.
      */
     'intro_text' => <<<INTRO
-The HOPN.SPACE API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+The hopn.space API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
 Our technical support is available by email at support@goworkandco.com and by phone at +33 9 72 28 11 76 from Monday to Friday from 9 a.m. to 6 p.m.
 
