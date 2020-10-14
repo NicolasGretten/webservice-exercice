@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $connection = 'common';
     protected $table = 'users';
     protected $dates = ['created_at, updated_at, deleted_at'];
-    protected $primaryKey = 'id';
+    protected $primaryKey = ['id', 'company_id', 'username'];
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -67,6 +67,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'api' => [
+                'company_id' => $this->company_id
+            ]
+        ];
     }
 }
