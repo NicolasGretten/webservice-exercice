@@ -32,6 +32,10 @@ trait FiltersTrait
     {
         $requestedFilters = request()->get('filters');
 
+        if($requestedFilters === null) {
+            return $builder;
+        }
+
         foreach ($requestedFilters as $filterName => $filterValue) {
             switch ($filterName) {
                 default:
