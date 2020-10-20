@@ -54,6 +54,10 @@ class ResponseMiddleware
             ]
         ];
 
+        if(!empty($response->headers->get('pagination'))) {
+            $returnData['content']['pagination'] = json_decode($response->headers->get('pagination'));
+        }
+
         if(! empty($response->original)) {
             $returnData['content']['body'] = $response->status() >= 400 ? ['error' => $response->original] : $response->original;
         }
