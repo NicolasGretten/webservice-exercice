@@ -8,7 +8,7 @@ use stdClass;
 
 trait ShuttleConfirmationTrait
 {
-    public function Confirm(stdClass $job, Model $model, string $object, string $column) {
+    public function Confirm(Model $model, string $object, string $column, stdClass $job) {
         try {
             $customerValidation = $model::where($object, $job->params->{$object})->where('column', $column)->first();
 
