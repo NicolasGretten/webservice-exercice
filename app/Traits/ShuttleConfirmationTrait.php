@@ -8,16 +8,16 @@ use stdClass;
 
 trait ShuttleConfirmationTrait
 {
-    public function ConfirmModelValue(Model $model, string $object, string $column) {
+    public function ConfirmModelValue(Model $model, string $object, string $column, stdClass $job) {
         try {
-            $customerValidation = $model::where($object, $this->job->params->{$object})->where('column', $column)->first();
+            $customerValidation = $model::where($object, $job->params->{$object})->where('column', $column)->first();
 
             if($customerValidation === null) {
-                throw new ModelNotFoundException($model->getMorphClass() . ' ' . $this->job->params->{$object} . ' does not exist', 404);
+                throw new ModelNotFoundException($model->getMorphClass() . ' ' . $job->params->{$object} . ' does not exist', 404);
             }
 
-            $customerValidation->status  = $this->job->success == true ? 'SUCCESS' : 'FAILURE';
-            $customerValidation->message = $this->job->message;
+            $customerValidation->status  = $job->success == true ? 'SUCCESS' : 'FAILURE';
+            $customerValidation->message = $job->message;
             $customerValidation->save();
         }
         catch(ModelNotFoundException $e) {
