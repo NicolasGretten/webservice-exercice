@@ -65,7 +65,7 @@ class ShuttleJob extends Job implements ShouldQueue
                 break;
                 */
                 default:
-                    throw new Exception('task ' . $this->currentJob->task . ' unknown', 404);
+                    throw new Exception('task ' . $currentJob->task . ' unknown', 404);
                     break;
             }
 
