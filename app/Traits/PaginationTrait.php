@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Database\Eloquent\Builder;
 
 trait PaginationTrait
