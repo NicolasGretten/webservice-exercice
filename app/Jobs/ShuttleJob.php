@@ -64,11 +64,11 @@ class ShuttleJob extends Job implements ShouldQueue
                     $this->ConfirmModelValue(new UserValidate(), 'user_id', 'company_id', $currentJob);
                 break;
                 */
+
                 default:
                     throw new Exception('task ' . $currentJob->task . ' unknown', 404);
                     break;
             }
-
         }
         catch(ValidationException $e) {
             report($e);
