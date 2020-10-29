@@ -5,8 +5,6 @@ namespace App\Jobs;
 use App\Traits\ShuttleVerificationTrait;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Validation\ValidationException;
-use stdClass;
 
 class ShuttleJob extends Job implements ShouldQueue
 {
@@ -69,9 +67,6 @@ class ShuttleJob extends Job implements ShouldQueue
                     throw new Exception('task ' . $currentJob->task . ' unknown', 404);
                     break;
             }
-        }
-        catch(ValidationException $e) {
-            report($e);
         }
         catch(Exception $e) {
             report($e);
