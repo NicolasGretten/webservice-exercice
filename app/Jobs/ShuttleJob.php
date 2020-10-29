@@ -45,26 +45,26 @@ class ShuttleJob extends Job implements ShouldQueue
     public function handle()
     {
         try {
-            $currentJob = json_decode(json_encode($this->request));
+            $job = json_decode(json_encode($this->request));
 
             /*
              * Select task
              */
-            switch ($currentJob->task) {
+            switch ($job->task) {
                 /*
                  * Example
                  *
-                case 'validate:customer:login_id':
-                    $this->ValidateModelValue(['id' => 'required|string|size:25'], $currentJob);
+                case 'check:customer:login_id':
+                    $this->CheckModelValue(new User, 'id', $job);
                 break;
 
-                case 'confirm:user:company_id':
-                    $this->ConfirmModelValue(new UserValidate(), 'user_id', 'company_id', $currentJob);
+                case 'update:user:company_id':
+                    $this->UpdateValidationModel(new UserValidate, 'user_id', 'company_id', $job);
                 break;
                 */
 
                 default:
-                    throw new Exception('task ' . $currentJob->task . ' unknown', 404);
+                    throw new Exception('task ' . $job->task . ' unknown', 404);
                     break;
             }
         }
