@@ -17,7 +17,7 @@ class ShuttleJob extends Job implements ShouldQueue
      *
      * @var int
      */
-    public int $tries = 25;
+    public int $tries = 100;
 
     /**
      * The maximum number of exceptions to allow before failing.
