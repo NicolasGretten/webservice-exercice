@@ -12,8 +12,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \App\Events\ShuttleJobEvent::class => [
-            \App\Listeners\ShuttleJobListener::class,
+        \App\Events\BroadcastJobEvent::class => [
+            \App\Listeners\BroadcastJobListener::class,
         ],
     ];
 }

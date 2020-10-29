@@ -4,7 +4,7 @@ namespace App\Events;
 
 use stdClass;
 
-class ShuttleJobEvent extends Event
+class BroadcastJobEvent extends Event
 {
     public $job;
 

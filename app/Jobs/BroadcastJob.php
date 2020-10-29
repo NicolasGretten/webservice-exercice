@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Traits\ShuttleVerificationTrait;
+use App\Traits\BroadcastVerificationTrait;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ShuttleJob extends Job implements ShouldQueue
+class BroadcastJob extends Job implements ShouldQueue
 {
-    use ShuttleVerificationTrait;
+    use BroadcastVerificationTrait;
 
     private array $request;
 

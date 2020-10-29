@@ -74,7 +74,7 @@ echo $post->translate('en')->title; // My cool post
 
 ## Create query job
 ```bash
-dispatch(new ShuttleJob([
+dispatch(new BroadcastJob([
     'task' => 'validate:login_id',
      'params' => [
          'login_id' => $event->customer->login_id,

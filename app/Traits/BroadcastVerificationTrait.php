@@ -2,14 +2,14 @@
 
 namespace App\Traits;
 
-use App\Events\ShuttleJobEvent;
+use App\Events\BroadcastJobEvent;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use stdClass;
 
-trait ShuttleVerificationTrait
+trait BroadcastVerificationTrait
 {
     public function UpdateValidationModel(Model $model, string $object, string $column, stdClass $job) {
         try {
@@ -84,7 +84,7 @@ trait ShuttleVerificationTrait
                 /*
                  * Create new event with created job
                  */
-                event(new ShuttleJobEvent($callbackJob));
+                event(new BroadcastJobEvent($callbackJob));
             }
         }
         catch(Exception $e) {
