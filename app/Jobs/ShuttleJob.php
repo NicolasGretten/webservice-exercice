@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Traits\ShuttleConfirmationTrait;
+use App\Traits\ShuttleVerificationTrait;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Validation\ValidationException;
@@ -10,7 +10,7 @@ use stdClass;
 
 class ShuttleJob extends Job implements ShouldQueue
 {
-    use ShuttleConfirmationTrait;
+    use ShuttleVerificationTrait;
 
     private array $request;
 
