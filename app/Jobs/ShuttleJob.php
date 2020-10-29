@@ -65,10 +65,9 @@ class ShuttleJob extends Job implements ShouldQueue
 
                 default:
                     throw new Exception('task ' . $job->task . ' unknown', 404);
-                    break;
+                break;
             }
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             report($e);
         }
     }

@@ -79,7 +79,7 @@ dispatch(new ShuttleJob([
      'params' => [
          'login_id' => $event->customer->login_id,
      ],
-    'callback_queue' => 'customer',
+    'callback_queue' => env('APP_NAME'),
     'callback_params' => [
         'customer_id' => $event->customer->id,
         'login_id'    => $event->customer->login_id
