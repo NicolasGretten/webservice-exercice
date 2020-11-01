@@ -41,7 +41,7 @@ php artisan migrate --database=[database] [--path=database\migrations\[filename]
 php artisan db:seed --class=[Class Name]
 ```
 
-###Update columns
+### Update columns
 ```bash
 php artisan make:migration add_role_to_[table_name]_table --table=[table_name]
 ```
