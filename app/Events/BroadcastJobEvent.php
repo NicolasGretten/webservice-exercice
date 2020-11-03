@@ -6,7 +6,7 @@ use stdClass;
 
 class BroadcastJobEvent extends Event
 {
-    public $job;
+    public StdClass $job;
 
     /**
      * Create a new event instance.
