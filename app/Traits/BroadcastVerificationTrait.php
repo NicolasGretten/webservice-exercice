@@ -64,7 +64,26 @@ trait BroadcastVerificationTrait
             /*
              * Put the job back in the queue as long as the information to be checked is in the SUCCESS state
              */
-            if($resultSet->status == 'PENDING') {
+            if(empty($resultSet)) {
+                /*
+                 * Set message and status to created job
+                 */
+                $callbackJob->success = false;
+                $callbackJob->message = 'Not found';
+
+                /*
+                 * Set task name to created job
+                 */
+                $action = explode(':', $job->task, 2);
+
+                $callbackJob->task = 'update:' . $action[1];
+
+                /*
+                 * Create new event with created job
+                 */
+                event(new BroadcastJobEvent($callbackJob));
+            }
+            elseif($resultSet->status == 'PENDING') {
                 exit;
             }
             else {
