@@ -7,21 +7,23 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use stdClass;
 
 trait BroadcastVerificationTrait
 {
     public function UpdateValidationModel(Model $model, string $object, string $column, stdClass $job) {
         try {
-            $customerValidation = $model::where($object, $job->params->{$object})->where('column', $column)->first();
+            $resultSet = DB::table($model->getTable())->where($object, $job->params->{$object})->where('column', $column)->first();
 
-            if($customerValidation === null) {
+            if($resultSet === null) {
                 throw new ModelNotFoundException($model->getMorphClass() . ' ' . $job->params->{$object} . ' does not exist', 404);
             }
 
-            $customerValidation->status  = $job->success == true ? 'SUCCESS' : 'FAILURE';
-            $customerValidation->message = $job->message;
-            $customerValidation->save();
+            DB::table($model->getTable())->where($object, $job->params->{$object})->where('column', $column)->update([
+                'status' => $job->success == true ? 'SUCCESS' : 'FAILURE',
+                'message' => $job->message
+            ]);
         }
         catch(ModelNotFoundException $e) {
             report($e);
