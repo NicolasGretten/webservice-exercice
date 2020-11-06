@@ -32,6 +32,7 @@ class ComposerStaticInit9f55565e39290642e0ad9b4b29f1c519
         'bee9632da3ca00a99623b9c35d0c4f8b' => __DIR__ . '/..' . '/laravel/lumen-framework/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '505eacb6a884976c94846354ed2ba6b0' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
