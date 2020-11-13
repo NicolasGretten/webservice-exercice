@@ -8,6 +8,7 @@
         "php": "^7.4",
         "ext-json": "*",
         "astrotomic/laravel-translatable": "^11.8",
+        "aws/aws-sdk-php": "^3.161",
         "bugsnag/bugsnag-laravel": "^2.0",
         "chuckrincon/lumen-config-discover": "^1.0",
         "laravel/lumen-framework": "^7.0",

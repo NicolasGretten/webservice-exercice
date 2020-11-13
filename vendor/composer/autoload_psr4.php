@@ -64,6 +64,7 @@ return array(
     'Laravel\\Lumen\\' => array($vendorDir . '/laravel/lumen-framework/src'),
     'Knuckles\\Scribe\\' => array($vendorDir . '/knuckleswtf/scribe/src'),
     'Knuckles\\Pastel\\' => array($vendorDir . '/knuckleswtf/pastel/src'),
+    'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
     'Illuminate\\View\\' => array($vendorDir . '/illuminate/view'),
     'Illuminate\\Validation\\' => array($vendorDir . '/illuminate/validation'),
@@ -110,6 +111,7 @@ return array(
     'Bugsnag\\BugsnagLaravel\\' => array($vendorDir . '/bugsnag/bugsnag-laravel/src'),
     'Bugsnag\\' => array($vendorDir . '/bugsnag/bugsnag/src'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
+    'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'Astrotomic\\Translatable\\' => array($vendorDir . '/astrotomic/laravel-translatable/src/Translatable'),
     'App\\' => array($baseDir . '/app'),
 );
