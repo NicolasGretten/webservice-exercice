@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7d76010fb9494769599718ea0a0ea3f",
+    "content-hash": "3909990961270ba7526885bc51d23c66",
     "packages": [
+        {
+            "name": "amranidev/micro-bus",
+            "version": "v0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amranidev/micro-bus.git",
+                "reference": "a2757fe3e2994378e0178edaead4e17ff2e94791"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amranidev/micro-bus/zipball/a2757fe3e2994378e0178edaead4e17ff2e94791",
+                "reference": "a2757fe3e2994378e0178edaead4e17ff2e94791",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "^3.95"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.8"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Amranidev\\MicroBus\\MicroBusServiceProvider"
+                    ],
+                    "aliases": {
+                        "Publisher": "Amranidev\\MicroBus\\Sns\\Facades\\Publisher"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Amranidev\\MicroBus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Houssain Amrani",
+                    "email": "amranidev@gmail.com"
+                }
+            ],
+            "description": "Build your laravel/lumen microservice application with AWS SNS/SQS",
+            "time": "2020-07-31T14:36:39+00:00"
+        },
         {
             "name": "astrotomic/laravel-translatable",
             "version": "v11.8.3",
@@ -5497,6 +5546,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {

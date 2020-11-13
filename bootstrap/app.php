@@ -60,6 +60,9 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('scribe');
+$app->configure('publisher');
+$app->configure('subscriber');
+$app->configure('queue');
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +104,8 @@ $app->register(Chuckrincon\LumenConfigDiscover\DiscoverServiceProvider::class);
 $app->register(Knuckles\Scribe\ScribeServiceProvider::class);
 $app->register(Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
 $app->register(Astrotomic\Translatable\TranslatableServiceProvider::class);
+$app->register(Amranidev\MicroBus\MicroBusServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

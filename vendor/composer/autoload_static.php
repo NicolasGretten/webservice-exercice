@@ -21,8 +21,8 @@ class ComposerStaticInit9f55565e39290642e0ad9b4b29f1c519
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
@@ -208,6 +208,7 @@ class ComposerStaticInit9f55565e39290642e0ad9b4b29f1c519
             'Aws\\' => 4,
             'Astrotomic\\Translatable\\' => 24,
             'App\\' => 4,
+            'Amranidev\\MicroBus\\' => 19,
         ),
     );
 
@@ -646,6 +647,10 @@ class ComposerStaticInit9f55565e39290642e0ad9b4b29f1c519
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Amranidev\\MicroBus\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amranidev/micro-bus/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -670,6 +675,25 @@ class ComposerStaticInit9f55565e39290642e0ad9b4b29f1c519
     );
 
     public static $classMap = array (
+        'Amranidev\\MicroBus\\MicroBus' => __DIR__ . '/..' . '/amranidev/micro-bus/src/MicroBus.php',
+        'Amranidev\\MicroBus\\MicroBusServiceProvider' => __DIR__ . '/..' . '/amranidev/micro-bus/src/MicroBusServiceProvider.php',
+        'Amranidev\\MicroBus\\Sns\\Console\\PublishMessage' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/Console/PublishMessage.php',
+        'Amranidev\\MicroBus\\Sns\\Facades\\Publisher' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/Facades/Publisher.php',
+        'Amranidev\\MicroBus\\Sns\\Publisher' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/Publisher.php',
+        'Amranidev\\MicroBus\\Sns\\SnsConnector' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/SnsConnector.php',
+        'Amranidev\\MicroBus\\Sns\\SnsManager' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/SnsManager.php',
+        'Amranidev\\MicroBus\\Sns\\SnsServiceProvider' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sns/SnsServiceProvider.php',
+        'Amranidev\\MicroBus\\Sqs\\Console\\JobSubscriberCommand' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Console/JobSubscriberCommand.php',
+        'Amranidev\\MicroBus\\Sqs\\Contracts\\Handleable' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Contracts/Handleable.php',
+        'Amranidev\\MicroBus\\Sqs\\JobMap' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/JobMap.php',
+        'Amranidev\\MicroBus\\Sqs\\Pipeline\\HasTopicArn' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Pipeline/HasTopicArn.php',
+        'Amranidev\\MicroBus\\Sqs\\Pipeline\\ValidateResponse' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Pipeline/ValidateResponse.php',
+        'Amranidev\\MicroBus\\Sqs\\Pipeline\\VerifySubscription' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Pipeline/VerifySubscription.php',
+        'Amranidev\\MicroBus\\Sqs\\SqsConnector' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/SqsConnector.php',
+        'Amranidev\\MicroBus\\Sqs\\SqsJob' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/SqsJob.php',
+        'Amranidev\\MicroBus\\Sqs\\SqsQueue' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/SqsQueue.php',
+        'Amranidev\\MicroBus\\Sqs\\SqsServiceProvider' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/SqsServiceProvider.php',
+        'Amranidev\\MicroBus\\Sqs\\Traits\\JobHandler' => __DIR__ . '/..' . '/amranidev/micro-bus/src/Sqs/Traits/JobHandler.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\BroadcastJobEvent' => __DIR__ . '/../..' . '/app/Events/BroadcastJobEvent.php',
         'App\\Events\\Event' => __DIR__ . '/../..' . '/app/Events/Event.php',

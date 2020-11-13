@@ -1,5 +1,56 @@
 [
     {
+        "name": "amranidev/micro-bus",
+        "version": "v0.1.6",
+        "version_normalized": "0.1.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/amranidev/micro-bus.git",
+            "reference": "a2757fe3e2994378e0178edaead4e17ff2e94791"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/amranidev/micro-bus/zipball/a2757fe3e2994378e0178edaead4e17ff2e94791",
+            "reference": "a2757fe3e2994378e0178edaead4e17ff2e94791",
+            "shasum": ""
+        },
+        "require": {
+            "aws/aws-sdk-php": "^3.95"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^3.8"
+        },
+        "time": "2020-07-31T14:36:39+00:00",
+        "type": "laravel-package",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Amranidev\\MicroBus\\MicroBusServiceProvider"
+                ],
+                "aliases": {
+                    "Publisher": "Amranidev\\MicroBus\\Sns\\Facades\\Publisher"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Amranidev\\MicroBus\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Houssain Amrani",
+                "email": "amranidev@gmail.com"
+            }
+        ],
+        "description": "Build your laravel/lumen microservice application with AWS SNS/SQS"
+    },
+    {
         "name": "astrotomic/laravel-translatable",
         "version": "v11.8.3",
         "version_normalized": "11.8.3.0",

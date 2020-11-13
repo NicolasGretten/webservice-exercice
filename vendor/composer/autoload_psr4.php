@@ -114,4 +114,5 @@ return array(
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'Astrotomic\\Translatable\\' => array($vendorDir . '/astrotomic/laravel-translatable/src/Translatable'),
     'App\\' => array($baseDir . '/app'),
+    'Amranidev\\MicroBus\\' => array($vendorDir . '/amranidev/micro-bus/src'),
 );
