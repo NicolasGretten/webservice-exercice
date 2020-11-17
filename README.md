@@ -72,19 +72,15 @@ $post = Post::first();
 echo $post->translate('en')->title; // My cool post
 ```
 
-## Create query job
+## Create PUB/SUB
+[Official documentation](https://github.com/amranidev/micro-bus)
 ```bash
-dispatch(new BroadcastJob([
-    'task' => 'validate:login_id',
-     'params' => [
-         'login_id' => $event->customer->login_id,
-     ],
-    'callback_queue' => env('APP_NAME'),
-    'callback_params' => [
-        'customer_id' => $event->customer->id,
-        'login_id'    => $event->customer->login_id
-    ]
-]))->onQueue('customer');
+Publisher::publish('user_created', $user);
+```
+
+Run queue pub/sub
+```bash
+php artisan queue:[listen,work] subscriber
 ```
 
 ## Queue
