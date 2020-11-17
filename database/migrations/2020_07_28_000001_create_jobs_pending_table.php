@@ -13,7 +13,7 @@ class CreateJobsPendingTable extends Migration
      */
     public function up()
     {
-        Schema::connection('common')->create('jobs_pending', function (Blueprint $table) {
+        Schema::connection('data')->create('jobs_pending', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('queue')->index();
             $table->longText('payload');
