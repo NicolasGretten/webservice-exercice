@@ -19,6 +19,10 @@ trait FiltersTrait
      */
     public function filterCompany(Builder $builder)
     {
+        if(auth()->user()->role === 'whitemark') {
+            return $builder;
+        }
+
         return $builder->where('company_id', auth()->user()->company_id);
     }
 

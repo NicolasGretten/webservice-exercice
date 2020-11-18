@@ -26,8 +26,8 @@ class RoleAuthorizationMiddleware
             return $this->unauthorized();
         }
 
-        // Add admin role to all routes
-        array_push($roles, 'admin');
+        // Add whitemark role to all routes
+        array_push($roles, 'whitemark');
 
         if ($user && sizeof(array_intersect(explode(',', $user->role), $roles))) {
             return $next($request);

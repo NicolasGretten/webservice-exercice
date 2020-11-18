@@ -18,7 +18,7 @@ class ExampleSeeder extends Seeder
             'id'            => substr('usr_' . md5(Str::uuid()),0 ,25),
             'username'      => 'john.doe@example.com',
             'password'      => Hash::make('john'),
-            'role'          => 'admin',
+            'role'          => 'company',
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now()
         ]);
@@ -46,7 +46,7 @@ class ExampleSeeder extends Seeder
             'id'            => substr('usr_' . md5(Str::uuid()),0 ,25),
             'username'      => 'jane.smith@example.com',
             'password'      => Hash::make('jane'),
-            'role'          => 'admin',
+            'role'          => 'chain',
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now(),
             'deleted_at'    => Carbon::now()
