@@ -27,6 +27,7 @@ class RoleAuthorizationMiddleware
         }
 
         // Add whitemark role to all routes
+        // todo : voir ca
         array_push($roles, 'whitemark');
 
         if ($user && sizeof(array_intersect(explode(',', $user->role), $roles))) {
