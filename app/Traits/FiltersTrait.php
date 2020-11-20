@@ -52,20 +52,13 @@ trait FiltersTrait
         }
 
         foreach ($requestedFilters as $filterName => $filterValue) {
-            switch ($filterName) {
-                case 'status':
-                    foreach ($filterValue as $value) {
-                        if (!in_array($value, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
-                            throw new Exception('The filter value ' . $value . ' is unknown', 404);
-                        }
-                    }
+            if($filterName === 'status') {
+                if (!in_array($filterValue, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
+                    throw new Exception('The filter value ' . $filterValue . ' is unknown', 404);
 
-                    $builder->whereIn('status', $filterValue);
-                break;
+                }
 
-                default:
-                    continue;
-                break;
+                $builder->where('status', $filterValue);
             }
         }
 
@@ -164,10 +157,6 @@ trait FiltersTrait
                             break;
                         }
                     }
-                break;
-
-                default:
-                    continue;
                 break;
             }
         }
