@@ -30,6 +30,17 @@ trait FiltersTrait
      * @param Builder $builder
      *
      * @return Builder
+     */
+    public function filterWhitemark(Builder $builder)
+    {
+        return $builder->where('whitemark_id', auth()->user()->whitemark_id);
+    }
+
+
+    /**
+     * @param Builder $builder
+     *
+     * @return Builder
      * @throws Exception
      */
     public function filterStatus(Builder $builder)
@@ -42,10 +53,6 @@ trait FiltersTrait
 
         foreach ($requestedFilters as $filterName => $filterValue) {
             switch ($filterName) {
-                default:
-                    throw new Exception('The filter ' . $filterName . ' is unknown', 404);
-                break;
-
                 case 'status':
                     foreach ($filterValue as $value) {
                         if (!in_array($value, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
@@ -54,6 +61,10 @@ trait FiltersTrait
                     }
 
                     $builder->whereIn('status', $filterValue);
+                break;
+
+                default:
+                    continue;
                 break;
             }
         }
@@ -77,10 +88,6 @@ trait FiltersTrait
 
         foreach ($requestedFilters as $filterName => $filterValue) {
             switch ($filterName) {
-                default:
-                    throw new Exception('The filter ' . $filterName . ' is unknown', 404);
-                break;
-
                 case 'created':
                     foreach ($requestedFilters[$filterName] as $optionKey => $optionValue) {
                         switch ($optionKey) {
@@ -157,6 +164,10 @@ trait FiltersTrait
                             break;
                         }
                     }
+                break;
+
+                default:
+                    continue;
                 break;
             }
         }
