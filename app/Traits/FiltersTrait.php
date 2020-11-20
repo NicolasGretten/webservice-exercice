@@ -55,6 +55,31 @@ trait FiltersTrait
 
                     $builder->whereIn('status', $filterValue);
                 break;
+            }
+        }
+
+        return $builder;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return Builder
+     * @throws Exception
+     */
+    public function filterDates(Builder $builder)
+    {
+        $requestedFilters = request()->get('filters');
+
+        if($requestedFilters === null) {
+            return $builder;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            switch ($filterName) {
+                default:
+                    throw new Exception('The filter ' . $filterName . ' is unknown', 404);
+                break;
 
                 case 'created':
                     foreach ($requestedFilters[$filterName] as $optionKey => $optionValue) {
