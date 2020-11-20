@@ -15,32 +15,36 @@ trait FiltersTrait
     /**
      * @param Builder $builder
      *
-     * @return Builder
+     * @return FiltersTrait
      */
     public function filterCompany(Builder $builder)
     {
         if(auth()->user()->role === 'whitemark') {
-            return $builder;
+            return $this;
         }
 
-        return $builder->where('company_id', auth()->user()->company_id);
+        $builder->where('company_id', auth()->user()->company_id);
+
+        return $this;
     }
 
     /**
      * @param Builder $builder
      *
-     * @return Builder
+     * @return FiltersTrait
      */
     public function filterWhitemark(Builder $builder)
     {
-        return $builder->where('whitemark_id', auth()->user()->whitemark_id);
+        $builder->where('whitemark_id', auth()->user()->whitemark_id);
+
+        return $this;
     }
 
 
     /**
      * @param Builder $builder
      *
-     * @return Builder
+     * @return FiltersTrait
      * @throws Exception
      */
     public function filterStatus(Builder $builder)
@@ -48,7 +52,7 @@ trait FiltersTrait
         $requestedFilters = request()->get('filters');
 
         if($requestedFilters === null) {
-            return $builder;
+            return $this;
         }
 
         foreach ($requestedFilters as $filterName => $filterValue) {
@@ -62,13 +66,13 @@ trait FiltersTrait
             }
         }
 
-        return $builder;
+        return $this;
     }
 
     /**
      * @param Builder $builder
      *
-     * @return Builder
+     * @return FiltersTrait
      * @throws Exception
      */
     public function filterDates(Builder $builder)
@@ -76,7 +80,7 @@ trait FiltersTrait
         $requestedFilters = request()->get('filters');
 
         if($requestedFilters === null) {
-            return $builder;
+            return $this;
         }
 
         foreach ($requestedFilters as $filterName => $filterValue) {
@@ -161,6 +165,6 @@ trait FiltersTrait
             }
         }
 
-        return $builder;
+        return $this;
     }
 }
