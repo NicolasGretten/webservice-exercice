@@ -35,35 +35,6 @@ trait FiltersTrait
      * @param Builder $builder
      *
      * @return FiltersTrait
-     */
-    public function company(Builder $builder)
-    {
-        if(auth()->user()->role === 'whitemark') {
-            return $this;
-        }
-
-        $builder->where('company_id', auth()->user()->company_id);
-
-        return $this;
-    }
-
-    /**
-     * @param Builder $builder
-     *
-     * @return FiltersTrait
-     */
-    public function whitemark(Builder $builder)
-    {
-        $builder->where('whitemark_id', auth()->user()->whitemark_id);
-
-        return $this;
-    }
-
-
-    /**
-     * @param Builder $builder
-     *
-     * @return FiltersTrait
      * @throws Exception
      */
     public function status(Builder $builder)
