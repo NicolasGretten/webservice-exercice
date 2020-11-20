@@ -15,9 +15,24 @@ trait FiltersTrait
     /**
      * @param Builder $builder
      *
+     * @param array   $filters
+     *
      * @return FiltersTrait
      */
-    public function filterCompany(Builder $builder)
+    public function filter(Builder $builder, Array $filters) {
+        foreach($filters as $filter) {
+            $this->{$filter}($builder);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     */
+    public function company(Builder $builder)
     {
         if(auth()->user()->role === 'whitemark') {
             return $this;
@@ -33,7 +48,7 @@ trait FiltersTrait
      *
      * @return FiltersTrait
      */
-    public function filterWhitemark(Builder $builder)
+    public function whitemark(Builder $builder)
     {
         $builder->where('whitemark_id', auth()->user()->whitemark_id);
 
@@ -47,7 +62,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function filterStatus(Builder $builder)
+    public function status(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
@@ -75,7 +90,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function filterDates(Builder $builder)
+    public function dates(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
