@@ -22,7 +22,7 @@ trait FiltersTrait
      */
     public function filter(Builder $builder, Array $filters) {
         foreach($filters as $filter) {
-            if(method_exists($this, $this->{$filter}) === false) {
+            if(method_exists($this, $filter) === false) {
                 throw new Exception('The filter ' . $filter . ' is unknown', 404);
             }
             $this->{$filter}($builder);
