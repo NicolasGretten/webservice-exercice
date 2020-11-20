@@ -94,7 +94,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function dates(Builder $builder)
+    public function date(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
