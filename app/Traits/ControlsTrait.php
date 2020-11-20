@@ -38,7 +38,9 @@ trait ControlsTrait
      */
     public function company(Builder $builder)
     {
-        $builder->where('company_id', auth()->user()->company_id);
+        if(!empty(auth()->user()->company_id)) {
+            $builder->where('company_id', auth()->user()->company_id);
+        }
 
         return $this;
     }
@@ -50,7 +52,9 @@ trait ControlsTrait
      */
     public function whitemark(Builder $builder)
     {
-        $builder->where('whitemark_id', auth()->user()->whitemark_id);
+        if(!empty(auth()->user()->whitemark_id)) {
+            $builder->where('whitemark_id', auth()->user()->whitemark_id);
+        }
 
         return $this;
     }
