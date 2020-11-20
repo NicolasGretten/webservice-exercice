@@ -18,9 +18,13 @@ trait FiltersTrait
      * @param array   $filters
      *
      * @return FiltersTrait
+     * @throws Exception
      */
     public function filter(Builder $builder, Array $filters) {
         foreach($filters as $filter) {
+            if(function_exists($this->{$filter}) === false) {
+                throw new Exception('The filter ' . $filter . ' is unknown', 404);
+            }
             $this->{$filter}($builder);
         }
 
