@@ -19,7 +19,7 @@ trait ControlsTrait
      * @return ControlsTrait
      * @throws Exception
      */
-    public function controls(Builder $builder, array $controls)
+    public function control(Builder $builder, array $controls)
     {
         foreach ($controls as $control) {
             if (method_exists($this, $control) === false) {
