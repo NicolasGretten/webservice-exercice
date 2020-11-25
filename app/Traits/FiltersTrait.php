@@ -49,7 +49,6 @@ trait FiltersTrait
             if($filterName === 'status') {
                 if (!in_array($filterValue, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
                     throw new Exception('The filter value ' . $filterValue . ' is unknown.', 404);
-
                 }
 
                 $builder->where('status', $filterValue);
