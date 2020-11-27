@@ -41,6 +41,9 @@ class PgSqlException extends PDOException
                 $this->message = empty($matches[5]) ? 'Generic SQL exception unhandled' : trim($matches[5]);
             }
         }
+        else {
+            $this->message = 'Generic SQL exception unhandled';
+        }
 
         return response()->json(['message' => $this->getMessage()], 409);
     }
