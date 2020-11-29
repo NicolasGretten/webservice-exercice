@@ -14,7 +14,7 @@ trait JwtTrait
     public function getJwtProfile() {
         $payload = JWTAuth::parseToken()->getPayload();
 
-        if(empty($payload->get('profiles'))) {
+        if(empty($payload->get('profile'))) {
             throw new JWTException('Profile payload not found in JWT token.', 409);
         }
 
