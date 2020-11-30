@@ -26,10 +26,6 @@ class RoleAuthorizationMiddleware
             return $this->unauthorized();
         }
 
-        // Add whitemark role to all routes
-        // todo : voir ca
-        array_push($roles, 'whitemark');
-
         if ($user && sizeof(array_intersect(explode(',', $user->role), $roles))) {
             return $next($request);
         }
@@ -39,6 +35,6 @@ class RoleAuthorizationMiddleware
 
     private function unauthorized($message = null)
     {
-        return response('You are unauthorized to access this resource', 401);
+        return response('You are unauthorized to access this resource.', 401);
     }
 }

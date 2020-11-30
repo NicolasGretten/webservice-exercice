@@ -13,7 +13,7 @@ class AuthMiddleware
      *
      * @var Auth
      */
-    protected $auth;
+    protected Auth $auth;
 
     /**
      * Create a new middleware instance.
@@ -38,7 +38,7 @@ class AuthMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response('You are unauthorized to access this resource', 401);
+            return response('You are unauthorized to access this resource.', 401);
         }
 
         return $next($request);
