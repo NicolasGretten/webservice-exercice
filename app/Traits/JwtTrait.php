@@ -2,29 +2,41 @@
 
 namespace App\Traits;
 
-use Exception;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Request;
+use stdClass;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 trait JwtTrait
 {
+    private stdClass $profile;
+
     /*
      * Retrieve JWT Profile
      */
-    public function getJwtProfile() {
-        try {
-            $payload = JWTAuth::parseToken()->getPayload();
-
-            if(empty($payload->get('profiles'))) {
-                throw new JWTException('Profile payload not found in JWT token.', 409);
-            }
-
-            return (object) Crypt::decrypt($payload->get('profile'));
+    public function jwt($payload) {
+        if(empty(Request::header('Authorization'))) {
+            return $this;
         }
-        catch(JWTException | DecryptException | Exception $e) {
-            throw $e;
+
+        $jwtPayload = JWTAuth::parseToken()->getPayload();
+
+        if(! empty($jwtPayload->get($payload))) {
+            $this->profile = (object) Crypt::decrypt($jwtPayload->get($payload));
         }
+
+        return $this;
+    }
+
+    public function get($key) {
+        if(empty($this->profile)) {
+            return null;
+        }
+
+        if(empty($this->profile->{$key})) {
+            return null;
+        }
+
+        return $this->profile->{$key};
     }
 }
