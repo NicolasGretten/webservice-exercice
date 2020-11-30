@@ -15,14 +15,12 @@ trait JwtTrait
      * Retrieve JWT Profile
      */
     public function jwt($payload) {
-        if(empty(Request::header('Authorization'))) {
-            return $this;
-        }
+        if(!empty(Request::header('Authorization'))) {
+            $jwtPayload = JWTAuth::parseToken()->getPayload();
 
-        $jwtPayload = JWTAuth::parseToken()->getPayload();
-
-        if(! empty($jwtPayload->get($payload))) {
-            $this->profile = (object) Crypt::decrypt($jwtPayload->get($payload));
+            if (!empty($jwtPayload->get($payload))) {
+                $this->profile = (object)Crypt::decrypt($jwtPayload->get($payload));
+            }
         }
 
         return $this;
