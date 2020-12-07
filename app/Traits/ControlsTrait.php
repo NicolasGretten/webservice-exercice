@@ -11,6 +11,8 @@ use Exception;
  */
 trait ControlsTrait
 {
+    use JwtTrait;
+
     /**
      * @param Builder $builder
      *
@@ -36,24 +38,14 @@ trait ControlsTrait
      *
      * @return ControlsTrait
      */
-    public function company(Builder $builder)
-    {
-        if(!empty(auth()->user()->company_id)) {
-            $builder->where('company_id', auth()->user()->company_id);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Builder $builder
-     *
-     * @return ControlsTrait
-     */
     public function whitemark(Builder $builder)
     {
-        if(!empty(auth()->user()->whitemark_id)) {
-            $builder->where('whitemark_id', auth()->user()->whitemark_id);
+        if(!empty($this->jwt('profile')->get('account')->whitemark_id)) {
+            $builder->where('whitemark_id', $this->jwt('profile')->get('account')->whitemark_id);
+        }
+
+        if(!empty(app('request')->input('whitemark_id'))) {
+            $builder->where('whitemark_id', app('request')->input('whitemark_id'));
         }
 
         return $this;
