@@ -35,6 +35,6 @@ trait JwtTrait
             return null;
         }
 
-        return $this->profile->{$key};
+        return gettype($this->profile->{$key}) == 'array' ? (object) $this->profile->{$key} : $this->profile->{$key};
     }
 }
