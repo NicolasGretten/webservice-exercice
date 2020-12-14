@@ -19,7 +19,7 @@ trait JwtTrait
             $jwtPayload = JWTAuth::parseToken()->getPayload();
 
             if (!empty($jwtPayload->get($payload))) {
-                $this->profile = (object)Crypt::decrypt($jwtPayload->get($payload));
+                $this->profile = (object) Crypt::decrypt($jwtPayload->get($payload));
             }
         }
 
