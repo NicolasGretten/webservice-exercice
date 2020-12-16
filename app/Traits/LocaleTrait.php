@@ -12,9 +12,11 @@ trait LocaleTrait
     {
         if (!empty($this->jwt('profile')->get('locale'))) {
             $locale = $this->jwt('profile')->get('locale');
-        } elseif (!empty(app('request')->headers->get('locale'))) {
+        }
+        elseif (!empty(app('request')->headers->get('locale'))) {
             $locale = app('request')->headers->get('locale');
-        } else {
+        }
+        else {
             $locale = env('LOCALES_ALLOWED');
         }
 
