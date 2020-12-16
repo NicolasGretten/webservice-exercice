@@ -10,14 +10,14 @@ trait LocaleTrait
 
     public function setLocale()
     {
-        if (!empty($this->jwt('profile')->get('locale'))) {
-            $locale = $this->jwt('profile')->get('locale');
+        if (!empty(app('request')->input('locale'))) {
+            $locale = app('request')->input('locale');
         }
         elseif (!empty(app('request')->headers->get('locale'))) {
             $locale = app('request')->headers->get('locale');
         }
-        elseif (!empty(app('request')->input('locale'))) {
-            $locale = app('request')->input('locale');
+        elseif (!empty($this->jwt('profile')->get('locale'))) {
+            $locale = $this->jwt('profile')->get('locale');
         }
         else {
             $locale = env('LOCALES_ALLOWED');
