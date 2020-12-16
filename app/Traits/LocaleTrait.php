@@ -16,6 +16,9 @@ trait LocaleTrait
         elseif (!empty(app('request')->headers->get('locale'))) {
             $locale = app('request')->headers->get('locale');
         }
+        elseif (!empty(app('request')->input('locale'))) {
+            $locale = app('request')->input('locale');
+        }
         else {
             $locale = env('LOCALES_ALLOWED');
         }
