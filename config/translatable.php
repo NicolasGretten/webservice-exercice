@@ -1,21 +1,6 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Locales
-    |--------------------------------------------------------------------------
-    |
-    | Contains an array with the applications available locales.
-    |
-    */
-    'locales' => [
-        'fr' => [
-            'FR'
-        ]
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Locale separator
@@ -40,7 +25,7 @@ return [
     | and never fallback to the translator one.
     |
     */
-    'locale' => null,
+    'locale' => env('DEFAULT_LOCALE'),
 
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +66,7 @@ return [
     | is used first. So "es" will be checked before "es_MX".
     |
     */
-    'fallback_locale' => 'fr_FR',
+    'fallback_locale' => env('DEFAULT_LOCALE'),
 
     /*
     |--------------------------------------------------------------------------
