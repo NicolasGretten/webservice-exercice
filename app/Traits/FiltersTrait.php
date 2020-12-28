@@ -20,7 +20,8 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function filter(Builder $builder, Array $filters) {
+    public function filter(Builder $builder, Array $filters): FiltersTrait
+    {
         foreach($filters as $filter) {
             if(method_exists($this, $filter) === false) {
                 throw new Exception('The filter ' . $filter . ' is unknown.', 404);
@@ -37,7 +38,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function status(Builder $builder)
+    public function status(Builder $builder): FiltersTrait
     {
         $requestedFilters = request()->get('filters');
 
@@ -64,7 +65,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function date(Builder $builder)
+    public function date(Builder $builder): FiltersTrait
     {
         $requestedFilters = request()->get('filters');
 
@@ -164,6 +165,77 @@ trait FiltersTrait
                     }
                 break;
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @param array   $controls
+     *
+     * @return FiltersTrait
+     * @throws Exception
+     */
+    public function control(Builder $builder, array $controls): FiltersTrait
+    {
+        foreach ($controls as $control) {
+            if (method_exists($this, $control) === false) {
+                throw new Exception('The control ' . $control . ' is unknown', 404);
+            }
+
+            $this->{$control}($builder);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     */
+    public function whitemark(Builder $builder): FiltersTrait
+    {
+        if(!empty($this->jwt('profile')->get('whitemark')->id)) {
+            $builder->where('whitemark_id', $this->jwt('profile')->get('account')->whitemark_id);
+        }
+
+        if(!empty(app('request')->input('whitemark_id'))) {
+            $builder->where('whitemark_id', app('request')->input('whitemark_id'));
+        }
+
+        return $this;
+    }
+
+    public function account(Builder $builder): FiltersTrait
+    {
+        if(!empty($this->jwt('profile')->get('account')->id)) {
+            $builder->where('account_id', app('request')->input('account_id'));
+        }
+
+        if(!empty(app('request')->input('company_id'))) {
+            $builder->where('company_id', app('request')->input('company_id'));
+        }
+        else {
+            $builder->whereNull('company_id');
+        }
+
+        return $this;
+    }
+
+    public function company(Builder $builder): FiltersTrait
+    {
+        if(!empty($this->jwt('profile')->get('company')->id)) {
+            $builder->where('company_id', $this->jwt('profile')->get('company')->id);
+        }
+
+        if(!empty(app('request')->input('company_id'))) {
+            $builder->where('company_id', app('request')->input('company_id'));
+        }
+        else {
+            $builder->whereNull('company_id');
         }
 
         return $this;
