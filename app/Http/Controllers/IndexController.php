@@ -19,7 +19,7 @@ class IndexController extends ControllerBase
      * @return JsonResponse
      *
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         return response()->json('Please read the API documentation at ' . env('APP_URL') . '/docs', 200);
     }
