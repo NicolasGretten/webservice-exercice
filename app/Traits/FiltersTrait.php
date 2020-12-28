@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 trait FiltersTrait
 {
+    use JwtTrait;
+
     /**
      * @param Builder $builder
      *
