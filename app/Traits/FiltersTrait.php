@@ -20,8 +20,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function filter(Builder $builder, Array $filters): FiltersTrait
-    {
+    public function filter(Builder $builder, Array $filters) {
         foreach($filters as $filter) {
             if(method_exists($this, $filter) === false) {
                 throw new Exception('The filter ' . $filter . ' is unknown.', 404);
@@ -38,7 +37,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function status(Builder $builder): FiltersTrait
+    public function status(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
@@ -65,7 +64,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function date(Builder $builder): FiltersTrait
+    public function date(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
@@ -178,8 +177,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function control(Builder $builder, array $controls): FiltersTrait
-    {
+    public function control(Builder $builder, array $controls) {
         foreach ($controls as $control) {
             if (method_exists($this, $control) === false) {
                 throw new Exception('The control ' . $control . ' is unknown', 404);
@@ -196,8 +194,7 @@ trait FiltersTrait
      *
      * @return FiltersTrait
      */
-    public function whitemark(Builder $builder): FiltersTrait
-    {
+    public function whitemark(Builder $builder) {
         if(!empty($this->jwt('profile')->get('whitemark')->id)) {
             $builder->where('whitemark_id', $this->jwt('profile')->get('account')->whitemark_id);
         }
@@ -209,8 +206,7 @@ trait FiltersTrait
         return $this;
     }
 
-    public function account(Builder $builder): FiltersTrait
-    {
+    public function account(Builder $builder) {
         if(!empty($this->jwt('profile')->get('account')->id)) {
             $builder->where('account_id', app('request')->input('account_id'));
         }
@@ -225,8 +221,7 @@ trait FiltersTrait
         return $this;
     }
 
-    public function company(Builder $builder): FiltersTrait
-    {
+    public function company(Builder $builder) {
         if(!empty($this->jwt('profile')->get('company')->id)) {
             $builder->where('company_id', $this->jwt('profile')->get('company')->id);
         }
