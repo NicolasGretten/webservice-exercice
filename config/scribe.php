@@ -112,7 +112,7 @@ INTRO
      * The HTML <title> for the generated documentation, and the name of the generated Postman collection.
      * If this is null, Scribe will infer it from config('app.name').
      */
-    'title' => env('APP_NAME') . ' / ' . env('APP_DOMAIN'),
+    'title' => env('APP_DOMAIN'),
 
     /*
      * Generate a Postman collection in addition to HTML docs.
