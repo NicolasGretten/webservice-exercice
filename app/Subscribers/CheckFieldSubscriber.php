@@ -54,8 +54,8 @@ class CheckFieldSubscriber
                             ]
                         ]));
                     break;
-                */
                 }
+            */
             }
         }
         catch(JsonEncodingException | Exception $e) {
