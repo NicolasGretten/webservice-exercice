@@ -1,5 +1,5 @@
 /.idea
-/public/docs/*
+/public/docs/**
 Homestead.json
 Homestead.yaml
 .env
