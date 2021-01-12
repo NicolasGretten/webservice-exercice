@@ -37,6 +37,7 @@ class CheckFieldSubscriber
             }
 
             if ($this->payload->receiver == env('APP_NAME')) {
+                /*
                 switch($this->payload->query->column) {
                     case 'id':
                         Publisher::publish('confirm_field', json_encode([
@@ -53,6 +54,7 @@ class CheckFieldSubscriber
                             ]
                         ]));
                     break;
+                */
                 }
             }
         }
