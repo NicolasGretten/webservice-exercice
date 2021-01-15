@@ -39,9 +39,9 @@ class ConfirmFieldSubscriber
 
             if ($this->payload->receiver == env('APP_NAME')) {
                 switch($this->payload->query->column) {
-                    case 'whitemark_id':
+                    case 'whitelabel_id':
                         /*
-                        AccountValidate::where('account_id', $this->payload->query->id)->where('column', 'whitemark_id')->where('status', 'PENDING')->update([
+                        AccountValidate::where('account_id', $this->payload->query->id)->where('column', 'whitelabel_id')->where('status', 'PENDING')->update([
                             'status' => strtoupper($this->payload->response->status),
                             'message' => $this->payload->response->message
                         ]);

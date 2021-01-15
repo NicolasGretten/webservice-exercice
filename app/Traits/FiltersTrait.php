@@ -196,13 +196,13 @@ trait FiltersTrait
      *
      * @return FiltersTrait
      */
-    public function whitemark(Builder $builder) {
-        if(!empty($this->jwt('profile')->get('whitemark')->id)) {
-            $builder->where('whitemark_id', $this->jwt('profile')->get('account')->whitemark_id);
+    public function whitelabel(Builder $builder) {
+        if(!empty($this->jwt('profile')->get('whitelabel')->id)) {
+            $builder->where('whitelabel_id', $this->jwt('profile')->get('account')->whitelabel_id);
         }
 
-        if(!empty(app('request')->input('whitemark_id'))) {
-            $builder->where('whitemark_id', app('request')->input('whitemark_id'));
+        if(!empty(app('request')->input('whitelabel_id'))) {
+            $builder->where('whitelabel_id', app('request')->input('whitelabel_id'));
         }
 
         return $this;
