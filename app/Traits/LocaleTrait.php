@@ -20,7 +20,7 @@ trait LocaleTrait
             $locale = $this->jwt('profile')->get('locale');
         }
         else {
-            $locale = env('LOCALES_ALLOWED');
+            $locale = env('DEFAULT_LOCALE');
         }
 
         self::checkRequestedLocale($locale);
