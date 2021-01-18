@@ -7,15 +7,16 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "ext-pdo": "*",
         "amranidev/micro-bus": "^0.1.6",
         "astrotomic/laravel-translatable": "^11.8",
         "aws/aws-sdk-php": "^3.161",
         "bugsnag/bugsnag-laravel": "^2.0",
         "chuckrincon/lumen-config-discover": "^1.0",
+        "laravel/helpers": "^1.4",
         "laravel/lumen-framework": "^7.0",
         "laravelista/lumen-vendor-publish": "7.0",
-        "tymon/jwt-auth": "dev-develop",
-      "ext-pdo": "*"
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
