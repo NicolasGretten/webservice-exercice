@@ -25,7 +25,7 @@ return [
     | and never fallback to the translator one.
     |
     */
-    'locale' => env('DEFAULT_LOCALE'),
+    'locale' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     | $useTranslationFallback when defined
     |
     */
-    'use_fallback' => false,
+    'use_fallback' => true,
 
     /*
     |--------------------------------------------------------------------------
