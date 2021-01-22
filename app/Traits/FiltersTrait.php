@@ -237,4 +237,42 @@ trait FiltersTrait
 
         return $this;
     }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     * @throws Exception
+     */
+    public function link(Builder $builder)
+    {
+        $requestedFilters = request()->get('filters');
+
+        if($requestedFilters === null) {
+            return $this;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            switch ($filterName) {
+                case 'object':
+                    foreach ($requestedFilters[$filterName] as $optionKey => $optionValue) {
+                        switch ($optionKey) {
+                            default:
+                                throw new Exception('The filter ' . $filterName . ' with the option ' . key($filterValue) . ' is unknown.', 404);
+                                break;
+                            case 'type':
+                                $builder->where('object_type', $filterValue);
+                                break;
+
+                            case 'id':
+                                $builder->where('object_id', $filterValue);
+                                break;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return $this;
+    }
 }
