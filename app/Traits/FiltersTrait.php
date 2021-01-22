@@ -267,6 +267,10 @@ trait FiltersTrait
                             case 'id':
                                 $builder->where('object_id', $filterValue);
                                 break;
+
+                            case 'owner':
+                                $builder->where('object_owner', $filterValue);
+                                break;
                         }
                     }
                     break;
