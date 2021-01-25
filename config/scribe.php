@@ -141,7 +141,7 @@ INTRO
          * The "Auth" section that should appear in the postman collection. See the schema docs for more information:
          * https://schema.getpostman.com/json/collection/v2.0.0/docs/index.html
          */
-        'auth' => true,
+        'auth' => false,
     ],
 
     /*
