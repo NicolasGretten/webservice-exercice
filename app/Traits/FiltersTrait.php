@@ -39,33 +39,6 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function status(Builder $builder)
-    {
-        $requestedFilters = request()->get('filters');
-
-        if($requestedFilters === null) {
-            return $this;
-        }
-
-        foreach ($requestedFilters as $filterName => $filterValue) {
-            if($filterName === 'status') {
-                if (!in_array($filterValue, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
-                    throw new Exception('The filter value ' . $filterValue . ' is unknown.', 404);
-                }
-
-                $builder->where('status', $filterValue);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Builder $builder
-     *
-     * @return FiltersTrait
-     * @throws Exception
-     */
     public function date(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
@@ -166,73 +139,6 @@ trait FiltersTrait
                     }
                 break;
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Builder $builder
-     *
-     * @param array   $controls
-     *
-     * @return FiltersTrait
-     * @throws Exception
-     */
-    public function control(Builder $builder, array $controls) {
-        foreach ($controls as $control) {
-            if (method_exists($this, $control) === false) {
-                throw new Exception('The control ' . $control . ' is unknown', 404);
-            }
-
-            $this->{$control}($builder);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Builder $builder
-     *
-     * @return FiltersTrait
-     */
-    public function whitelabel(Builder $builder) {
-        if(!empty($this->jwt('profile')->get('whitelabel')->id)) {
-            $builder->where('whitelabel_id', $this->jwt('profile')->get('account')->whitelabel_id);
-        }
-
-        if(!empty(app('request')->input('whitelabel_id'))) {
-            $builder->where('whitelabel_id', app('request')->input('whitelabel_id'));
-        }
-
-        return $this;
-    }
-
-    public function account(Builder $builder) {
-        if(!empty($this->jwt('profile')->get('account')->id)) {
-            $builder->where('account_id', app('request')->input('account_id'));
-        }
-
-        if(!empty(app('request')->input('company_id'))) {
-            $builder->where('company_id', app('request')->input('company_id'));
-        }
-        else {
-            $builder->whereNull('company_id');
-        }
-
-        return $this;
-    }
-
-    public function company(Builder $builder) {
-        if(!empty($this->jwt('profile')->get('company')->id)) {
-            $builder->where('company_id', $this->jwt('profile')->get('company')->id);
-        }
-
-        if(!empty(app('request')->input('company_id'))) {
-            $builder->where('company_id', app('request')->input('company_id'));
-        }
-        else {
-            $builder->whereNull('company_id');
         }
 
         return $this;
