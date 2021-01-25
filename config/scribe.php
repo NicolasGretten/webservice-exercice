@@ -48,7 +48,7 @@ return [
         /*
          * Set this to true if your API is authenticated.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * Where is the auth value meant to be sent in a request?
