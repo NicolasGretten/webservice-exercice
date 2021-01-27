@@ -143,4 +143,20 @@ trait FiltersTrait
 
         return $this;
     }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     */
+    public function itemsId(Builder $builder)
+    {
+        $requestedIdList = htmlspecialchars(request()->get('items_id'));
+        if(!empty($requestedIdList))
+        {
+            $requestedIdList = explode(',', $requestedIdList);
+            $builder->WhereIn('id', $requestedIdList)->get();
+        }
+        return $this;
+    }
 }
