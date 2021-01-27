@@ -50,6 +50,6 @@ trait PaginationTrait
             $parameters[$key] = $val;
         }
 
-        return Request()->input('_url') . '?' . http_build_query($parameters);
+        return env('APP_URL') . Request()->getPathInfo() . '?' . http_build_query($parameters);
     }
 }
