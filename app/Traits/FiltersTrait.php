@@ -5,6 +5,7 @@ namespace App\Traits;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 
 /**
  * Trait FiltersTrait
@@ -151,12 +152,17 @@ trait FiltersTrait
      */
     public function itemsId(Builder $builder)
     {
-        $requestedIdList = htmlspecialchars(request()->get('items_id'));
-        if(!empty($requestedIdList))
+        if(!empty(request()->get('items_id')))
         {
-            $requestedIdList = explode(',', $requestedIdList);
-            $builder->WhereIn('id', $requestedIdList)->get();
+            $items = json_decode(request()->get('items_id'));
+
+            if(json_last_error()) {
+                throw new JsonEncodingException();
+            }
+
+            $builder->WhereIn('id', $items)->get();
         }
+
         return $this;
     }
 }
