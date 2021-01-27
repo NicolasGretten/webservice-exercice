@@ -149,6 +149,33 @@ trait FiltersTrait
      * @param Builder $builder
      *
      * @return FiltersTrait
+     * @throws Exception
+     */
+    public function status(Builder $builder)
+    {
+        $requestedFilters = request()->get('filters');
+
+        if($requestedFilters === null) {
+            return $this;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            if($filterName === 'status') {
+                if (!in_array($filterValue, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
+                    throw new Exception('The filter value ' . $filterValue . ' is unknown.', 404);
+                }
+
+                $builder->where('status', $filterValue);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
      */
     public function itemsId(Builder $builder)
     {
