@@ -5,6 +5,7 @@ namespace App\Traits;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 
 /**
  * Trait FiltersTrait
@@ -139,6 +140,54 @@ trait FiltersTrait
                     }
                 break;
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     * @throws Exception
+     */
+    public function status(Builder $builder)
+    {
+        $requestedFilters = request()->get('filters');
+
+        if($requestedFilters === null) {
+            return $this;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            if($filterName === 'status') {
+                if (!in_array($filterValue, ['FAILURE', 'PENDING', 'SUCCESS'], true)) {
+                    throw new Exception('The filter value ' . $filterValue . ' is unknown.', 404);
+                }
+
+                $builder->where('status', $filterValue);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     */
+    public function itemsId(Builder $builder)
+    {
+        if(!empty(request()->get('items_id')))
+        {
+            $items = json_decode(request()->get('items_id'));
+
+            if(json_last_error()) {
+                throw new JsonEncodingException();
+            }
+
+            $builder->WhereIn('id', $items)->get();
         }
 
         return $this;

@@ -48,7 +48,7 @@ return [
         /*
          * Set this to true if your API is authenticated.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * Where is the auth value meant to be sent in a request?
@@ -141,7 +141,7 @@ INTRO
          * The "Auth" section that should appear in the postman collection. See the schema docs for more information:
          * https://schema.getpostman.com/json/collection/v2.0.0/docs/index.html
          */
-        'auth' => true,
+        'auth' => false,
     ],
 
     /*
