@@ -44,10 +44,12 @@ class ResponseMiddleware
         // Get the response
         $response = $next($request);
 
+        $body = $response->status() >= 400 ? ['error' => $response->original] : $response->original;
+
         // Send response
         $returnData = [
             'timestamp' => Carbon::now()->getTimestamp(),
-            'signature' => md5(json_encode($response->original)),
+            'signature' => md5(json_encode($body)),
             'content' => [
                 'success' => $response->status() >= 400 ? false : true,
                 'async' => empty($response->headers->get('async')) ? false : (boolean) $response->headers->get('async') == true
@@ -59,7 +61,7 @@ class ResponseMiddleware
         }
 
         if(! empty($response->original)) {
-            $returnData['content']['body'] = $response->status() >= 400 ? ['error' => $response->original] : $response->original;
+            $returnData['content']['body'] = $body;
         }
 
         /*
