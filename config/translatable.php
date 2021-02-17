@@ -3,6 +3,16 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Application Locales
+    |--------------------------------------------------------------------------
+    |
+    | Contains an array with the applications available locales.
+    |
+    */
+    'locales' => getLocalesAllowed(),
+
+    /*
+    |--------------------------------------------------------------------------
     | Locale separator
     |--------------------------------------------------------------------------
     |
@@ -66,7 +76,7 @@ return [
     | is used first. So "es" will be checked before "es_MX".
     |
     */
-    'fallback_locale' => env('DEFAULT_LOCALE'),
+    'fallback_locale' => null,
 
     /*
     |--------------------------------------------------------------------------
