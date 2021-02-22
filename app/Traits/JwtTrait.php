@@ -5,6 +5,7 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Request;
 use stdClass;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 trait JwtTrait
@@ -14,12 +15,17 @@ trait JwtTrait
     /*
      * Retrieve JWT Profile
      */
-    public function jwt($payload) {
-        if(!empty(Request::header('Authorization'))) {
-            $jwtPayload = JWTAuth::parseToken()->getPayload();
+    public function jwt($payload)
+    {
+        if (!empty(Request::header('Authorization'))) {
+            try {
+                $jwtPayload = JWTAuth::parseToken()->getPayload();
 
-            if (!empty($jwtPayload->get($payload))) {
-                $this->profile = (object) Crypt::decrypt($jwtPayload->get($payload));
+                if (!empty($jwtPayload->get($payload))) {
+                    $this->profile = (object)Crypt::decrypt($jwtPayload->get($payload));
+                }
+            } catch (JWTException $e) {
+                return $this;
             }
         }
 
