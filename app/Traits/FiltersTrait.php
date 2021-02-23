@@ -193,7 +193,7 @@ trait FiltersTrait
         return $this;
     }
 
-    public function relations(Builder $builder): FiltersTrait
+    public function relations(Builder $builder)
     {
         $requestedFilters = request()->get('filters');
 
