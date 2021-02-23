@@ -203,11 +203,13 @@ trait FiltersTrait
 
         foreach ($requestedFilters as $filterName => $filterValue) {
             if ($filterName === 'relations') {
-                foreach (json_decode($filterValue) as $relation) {
-
-                    $builder = $builder->with($relation);
+                if(!empty($filterValue)){
+                    foreach (json_decode($filterValue) as $relation) {
+                        $builder = $builder->with($relation);
+                    }
                 }
             }
+            return $this;
         }
         return $this;
     }
