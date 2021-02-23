@@ -204,12 +204,7 @@ trait FiltersTrait
         foreach ($requestedFilters as $filterName => $filterValue) {
             if ($filterName === 'relations') {
                 foreach (json_decode($filterValue) as $relation) {
-                    if ($relation === "addresses") {
-                        continue;
-                    }
-                    if ($relation === "address") {
-                        continue;
-                    }
+
                     $builder = $builder->with($relation);
                 }
             }
