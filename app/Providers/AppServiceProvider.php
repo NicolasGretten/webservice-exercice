@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::replacer('relations', function($message, $attribute, $rule, $parameters) {
-            return str_replace(':attribute', $attribute, 'One of the relations does not exist.');
+            return 'One of the relations does not exist.';
         });
 
         \Illuminate\Support\Collection::macro('toArrayRecursive', function () {
