@@ -208,8 +208,9 @@ trait FiltersTrait
                         $builder = $builder->with($relation);
                     }
                 }
+                return $this;
             }
-            return $this;
+
         }
         return $this;
     }
