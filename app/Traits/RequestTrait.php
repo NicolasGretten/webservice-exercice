@@ -14,11 +14,13 @@ trait RequestTrait
 {
     protected $savedRelations;
 
-    public function resetRelations(Request $request, array $relations)
+    public function resetRelations(Request $request, array $relations = null)
     {
         $savedRelations = $request->filters['relations'];
         unset($request['filters']);
-        $request->request->add(['filters'=>['relations' => json_encode($relations)]]);
+        if($relations != null) {
+            $request->request->add(['filters'=>['relations' => json_encode($relations)]]);
+        }
         return $request;
     }
 
