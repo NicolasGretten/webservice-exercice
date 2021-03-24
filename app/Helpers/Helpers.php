@@ -18,7 +18,7 @@ function getLocalesAllowed(): array
 {
     $locales = [];
 
-    $localesAllowed = explode(',', env('locales_allowed'));
+    $localesAllowed = explode(',', env('LOCALES_ALLOWED'));
 
     foreach($localesAllowed as $localeAllowed) {
         $country = explode('-', $localeAllowed);
