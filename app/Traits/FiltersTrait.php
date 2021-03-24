@@ -201,16 +201,24 @@ trait FiltersTrait
             return $this;
         }
 
+        // récupération des méthodes suivant le model demander
+        $methodsName = $class_methods = get_class_methods($builder->first());
+
         foreach ($requestedFilters as $filterName => $filterValue) {
             if ($filterName === 'relations') {
                 if(!empty($filterValue)){
                     foreach (json_decode($filterValue) as $relation) {
+
+                        // si la relations n'est pas trouver dans le modèle, on continue
+                        if (array_search($relation,$methodsName) === false) {
+                            continue;
+                        }
+
                         $builder = $builder->with($relation);
                     }
                 }
                 return $this;
             }
-
         }
         return $this;
     }
