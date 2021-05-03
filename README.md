@@ -1,101 +1,28 @@
-# HOPN.SPACE README
+# Exercice Webservices
 
-## Update current API from template
-First, declare template into current template
+## API
+API faites avec lumen et postegresql
+
+J'ai eu quelques soucis avec symfony lors de la création de porjet alors j'ai utiliser le framework avec lequel je travaille en alternance.
+
+## .ENV
+
+Pour utiliser l'API il faut copier le fichier .env.example, le renommer en .env et resneigner les information de la DB
+## Les commandes
+
+Migrer la base de données et la seed (seed de 5 articles)
+
 ```bash
-git remote add template [URL of the template repo]
+php artisan migrate:fresh --seed
 ```
 
-Then run git fetch to update the changes
-```bash
-git fetch --all
-```
-
-Then is possible to merge another branch from the new remote to the current one
-```bash
-git merge template/[branch to merge] [--allow-unrelated-histories]
-```
-## Documentation
-[Official documentation](https://scribe.readthedocs.io/en/latest/documenting/index.html)
-
-Documentation is accessible from endpoint / docs
-
-Documentation generating
+génerer la doc (quelque soucis d'affichage en localhost)
 ```bash
 php artisan scribe:generate
 ```
 
-## Database
-### Create new table
+lancer le serveur php
+
 ```bash
-php artisan make:migration create_[table_name]_table
-```
-
-### Run migrations
-```bash
-php artisan migrate --database=[database] [--path=database\migrations\[filename].php]]
-```
-### Seed data
-[Official documentation](https://laravel.com/docs/7.x/seeding)
-```
-php artisan db:seed --class=[Class Name]
-```
-
-### Update columns
-```bash
-php artisan make:migration add_role_to_[table_name]_table --table=[table_name]
-```
-## Translations
-[Official documentation](https://github.com/Astrotomic/laravel-translatable)
-
-Get
-```bash
-$post = Post::first();
-echo $post->translate('en')->title; // My first post
-
-App::setLocale('en');
-echo $post->title; // My first post
-
-App::setLocale('de');
-echo $post->title; // Mein erster Post
-```
-
-Post
-```bash
-$post = Post::first();
-echo $post->translate('en')->title; // My first post
-
-$post->translate('en')->title = 'My cool post';
-$post->save();
-
-$post = Post::first();
-echo $post->translate('en')->title; // My cool post
-```
-
-## Create PUB/SUB
-[Official documentation](https://github.com/amranidev/micro-bus)
-```bash
-Publisher::publish('user_created', $user);
-```
-
-Run queue pub/sub
-```bash
-php artisan queue:[listen,work] subscriber
-```
-
-## Queue
-[Official documentation](https://lumen.laravel.com/docs/5.1/queues)
-Run Queue
-```bash
-php artisan queue:listen --queue=[queue]
-```
-Delay
-```bash
-dispatch(new MyMailerJob)->delay(Carbon::now()->addMinutes(10));
-```
-
-## Misc
-Return json from route with async param
-```bash
-return response()->json([$content], [code], ['async' => 'true']);
+php -S localhost:8080 -t [chemin du projet\public]
 ```

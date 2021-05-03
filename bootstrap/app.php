@@ -75,15 +75,6 @@ $app->configure('queue');
 |
 */
 
-$app->middleware([
-    'response' => App\Http\Middleware\ResponseMiddleware::class
-]);
-
-$app->routeMiddleware([
-    'auth' => App\Http\Middleware\AuthMiddleware::class,
-    'auth.role' => \App\Http\Middleware\RoleAuthorizationMiddleware::class
-]);
-
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -129,6 +120,11 @@ $app->router->group([
      * /docs
      */
     require __DIR__ . '/../routes/docs/index.php';
+
+    /*
+     * /docs
+     */
+    require __DIR__ . '/../routes/articles/index.php';
 });
 
 return $app;
