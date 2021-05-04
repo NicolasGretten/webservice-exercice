@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static where(string $string, mixed $article_id)
+ * @property mixed titre
+ * @property mixed description
  */
 class Article extends Model
 {

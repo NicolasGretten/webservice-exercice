@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class ArticleController extends ControllerBase
@@ -52,9 +54,50 @@ class ArticleController extends ControllerBase
             }
 
             return response()->json($article);
-        } catch(Excepiton $e){
-
+        } catch(Exception $e){
+            return response()->json($e->getMessage(), 500);
         }
+    }
 
+    /**
+     * Create a new article
+     *
+     * Create a new article.
+     *
+     * @group Articles
+     *
+     * @bodyParam titre             required    Titre de l'article          Example: Le Titre
+     * @bodyParam description       required    Contenu de l'article        Example: Lorem ipsum
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function create(Request $request): JsonResponse
+    {
+        try {
+
+            $this->validate($request, [
+                'titre' => 'required|string',
+                'description'=>'required|string'
+            ]);
+
+            DB::beginTransaction();
+
+            $article = new Article();
+            $article->titre = $request->titre;
+            $article->description = $request->description;
+            $article->save();
+
+            DB::commit();
+
+            return response()->json($article);
+
+        } catch(ValidationException $e){
+            return response()->json($e->getMessage(), 409);
+        } catch(Exception $e){
+            DB::rollBack();
+            return response()->json($e->getMessage(), 500);
+        }
     }
 }

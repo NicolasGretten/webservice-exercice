@@ -13,10 +13,16 @@
 |
 */
 $router->group(['prefix' => 'blog/articles'], function () use ($router) {
+
     $router->get('/{article_id}', [
         'uses' => 'ArticleController@retrieve'
     ]);
+
     $router->get('/', [
         'uses' => 'ArticleController@list'
+    ]);
+
+    $router->post('/', [
+        'uses' => 'ArticleController@create'
     ]);
 });
