@@ -18,6 +18,8 @@ class ArticleController extends ControllerBase
      *
      * @group Articles
      *
+     * @responseFile /responses/articles/list.json
+     *
      * @return JsonResponse
      */
     public function list(): JsonResponse
@@ -38,7 +40,9 @@ class ArticleController extends ControllerBase
      *
      * @group Articles
      *
-     * @urlParam article_id     required    Article ID      Example:1
+     * @urlParam article_id     required    Article ID      Example:1*
+     *
+     * @responseFile /responses/articles/retrieve.json
      *
      * @param Request $request
      * @return JsonResponse
@@ -68,6 +72,8 @@ class ArticleController extends ControllerBase
      *
      * @bodyParam titre             required    Titre de l'article          Example: Le Titre
      * @bodyParam description       required    Contenu de l'article        Example: Lorem ipsum
+     *
+     * @responseFile /responses/articles/create.json
      *
      * @param Request $request
      * @return JsonResponse
