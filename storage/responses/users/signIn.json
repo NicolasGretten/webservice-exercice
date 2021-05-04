@@ -1,0 +1,8 @@
+{
+    "status": "Connected",
+    "credentials": {
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODA4MFwvdXNlcnNcL3NpZ25JbiIsImlhdCI6MTYyMDEyNTk3NCwiZXhwIjoxNjIwMTI5NTc0LCJuYmYiOjE2MjAxMjU5NzQsImp0aSI6ImYwVENwU1RXQWVHeThuNloiLCJzdWIiOjIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.ezjU8fFW5rGH7D7Q2D3egwUVx3MDKqrPF4ObD482HpE",
+        "token_type": "bearer",
+        "expires_in": 360000
+    }
+}

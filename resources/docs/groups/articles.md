@@ -311,4 +311,108 @@ curl -X POST \
 
 
 
+## Update a new article
+
+
+Update a new article.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->patch(
+    'http://localhost:8080/blog/articles/1',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'titre' => 'Le Titre',
+            'description' => 'Lorem ipsum',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8080/blog/articles/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "titre": "Le Titre",
+    "description": "Lorem ipsum"
+}
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://localhost:8080/blog/articles/1'
+payload = {
+    "titre": "Le Titre",
+    "description": "Lorem ipsum"
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PATCH', url, headers=headers, json=payload)
+response.json()
+```
+
+```bash
+curl -X PATCH \
+    "http://localhost:8080/blog/articles/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"titre":"Le Titre","description":"Lorem ipsum"}'
+
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "titre": "test post",
+    "description": "ceci est un test sur la route patch avec un post",
+    "created_at": "2021-05-04T10:38:48.000000Z",
+    "updated_at": "2021-05-04T11:05:18.000000Z"
+}
+```
+
+### Request
+<small class="badge badge-purple">PATCH</small>
+ **`blog/articles/{article_id}`**
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<code><b>titre</b></code>&nbsp; <small>Titre</small>         <i>optional</i>    <br>
+    de l'article
+
+<code><b>description</b></code>&nbsp; <small>Contenu</small>         <i>optional</i>    <br>
+    de l'article
+
+
+
 

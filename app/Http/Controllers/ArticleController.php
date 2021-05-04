@@ -106,4 +106,52 @@ class ArticleController extends ControllerBase
             return response()->json($e->getMessage(), 500);
         }
     }
+
+    /**
+     * Update a new article
+     *
+     * Update a new article.
+     *
+     * @group Articles
+     *
+     * @bodyParam titre                     Titre de l'article          Example: Le Titre
+     * @bodyParam description               Contenu de l'article        Example: Lorem ipsum
+     *
+     * @responseFile /responses/articles/update.json
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function update(Request $request): JsonResponse
+    {
+        try {
+
+            $this->validate($request, [
+                'titre' => 'string',
+                'description'=>'string'
+            ]);
+
+            DB::beginTransaction();
+
+            $article = Article::where('id', $request->article_id)->first();
+
+            if (empty($article)){
+                throw new Exception('L\'article n\'existe pas.', 404);
+            }
+            $article->titre = $request->input('titre', $article->getOriginal('titre'));
+            $article->description = $request->input('description', $article->getOriginal('description'));
+            $article->save();
+
+            DB::commit();
+
+            return response()->json($article);
+
+        } catch(ValidationException $e){
+            return response()->json($e->getMessage(), 409);
+        } catch(Exception $e){
+            DB::rollBack();
+            return response()->json($e->getMessage(), 500);
+        }
+    }
 }

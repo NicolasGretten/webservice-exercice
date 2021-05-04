@@ -39,3 +39,11 @@ GET:
 POST : 
 
 - http://localhost:[port]/blog/articles
+
+## Mise à jour 04/05/2021 Après-Midi
+
+- Ajout de des utilisateurs
+- Une route POST pour s'inscrire : http://localhost:[port]/users/register
+- Une route POST pour s'identifier : http://localhost:[port]/users/signIn
+- Protection des routes POST et PATCH des Articles avec une authentification : ajout du Bearer Token dans le header
+- Ajout du PATCH pour les articles

@@ -23,6 +23,12 @@ $router->group(['prefix' => 'blog/articles'], function () use ($router) {
     ]);
 
     $router->post('/', [
+        'middleware' => ['auth'],
         'uses' => 'ArticleController@create'
+    ]);
+
+    $router->patch('/{article_id}', [
+        'middleware' => ['auth'],
+        'uses' => 'ArticleController@update'
     ]);
 });

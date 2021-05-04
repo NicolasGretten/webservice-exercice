@@ -75,6 +75,10 @@ $app->configure('queue');
 |
 */
 
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\AuthMiddleware::class,
+]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -96,6 +100,8 @@ $app->register(Knuckles\Scribe\ScribeServiceProvider::class);
 $app->register(Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class);
 $app->register(Astrotomic\Translatable\TranslatableServiceProvider::class);
 $app->register(Amranidev\MicroBus\MicroBusServiceProvider::class);
+
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -122,9 +128,14 @@ $app->router->group([
     require __DIR__ . '/../routes/docs/index.php';
 
     /*
-     * /docs
+     * /articles
      */
     require __DIR__ . '/../routes/articles/index.php';
+
+    /*
+     * /users
+     */
+    require __DIR__ . '/../routes/users/index.php';
 });
 
 return $app;
